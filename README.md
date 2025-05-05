@@ -5,7 +5,7 @@ Mainly focussed on the Home Assistant Companion app but the dashboards also work
 Homeapp makes extensive use of Home Assistant areas and labels ("on_home_view", "favorite", "in_summaries") and other settings.
 Areas drive dashboard creation, only entities assigned to an area are included.
 Labels determine what entities are included on the home page and in chips and badges.
-Adding entities is described in [Populating the dashboard](https://github.com/hwhesselink/homeapp#populating-the-dashboard) below.
+Adding entities is described in [Populating the dashboard](#populating-the-dashboard) below.
 
 # Installation
 There's no HACS support yet so to install you'll need access to your Home Assistant config.
