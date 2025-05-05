@@ -40,7 +40,6 @@ if len(sys.argv) > 1:
 else:
     config = 'default'
 home_name, dashboard_name, config_name, ha_host, bearer_token = configs[config]
-home_name = 'My Home'
 
 
 # The tabs at the top of the page
