@@ -1,0 +1,84 @@
+# takes a list of entities, filters by deviceclass (e.g. temperature)
+# and generates "low-high" or just "high" if they're the same or only
+# differ by 1
+{% macro min_max_range(deviceclass, entities) %}
+{% set s = expand(entities)|
+   selectattr('attributes.device_class', 'defined')|
+   selectattr('attributes.device_class', 'eq', deviceclass)|
+   selectattr('state', 'is_number')|
+   map(attribute='state')|
+   map('round')|
+   list
+%}
+{% set l, h = min(s), max(s) %}
+{% set d = (l - h)|abs() %}
+{{ h if d < 2 else l|string + '-' + h|string }}
+{% endmacro %}
+
+# returns how many of entities have deviceclass
+{% macro deviceclass_count(deviceclass, entities) %}
+{{ expand(entities)|
+   selectattr('attributes.device_class', 'defined')|
+   selectattr('attributes.device_class', 'eq', deviceclass)|
+   selectattr('entity_id', 'has_value')|
+   list|
+   count
+}}
+{% endmacro %}
+
+# returns how many security entities are active
+{% macro security_count(entities, security_deviceclasses) %}
+{% set l = entities
+   |select('match', 'lock\.')
+   |reject('is_state', 'locked')
+   |expand
+   |list
+%}
+{% set b = entities
+   |select('match', 'binary_sensor\.')
+   |expand
+   |selectattr('attributes.device_class', 'defined')
+   |selectattr('attributes.device_class', 'in', security_deviceclasses)
+   |rejectattr('state', 'eq', 'off')
+   |list
+%}
+{% set c = entities
+   |select('match', 'cover\.')
+   |expand
+   |selectattr('attributes.device_class', 'defined')
+   |selectattr('attributes.device_class', 'in', security_deviceclasses)
+   |rejectattr('state', 'eq', 'closed')
+   |list
+%}
+{{ (l+b+c)|selectattr('entity_id', 'has_value')|list|count }}
+{% endmacro %}
+
+# returns how many non-security cover entities are active
+{% macro cover_count(entities, rev_open_close, security_deviceclasses) %}
+{% set c = entities
+   |select('match', 'cover\.')
+   |expand
+   |rejectattr('attributes.device_class', 'in', security_deviceclasses)
+   |selectattr('entity_id', 'has_value')
+   |list
+%}
+{% set open = c
+   |rejectattr('attributes.device_class', 'in', rev_open_close)
+   |rejectattr('state', 'eq', 'closed')
+   |list
+%}
+{% set closed = c
+   |selectattr('attributes.device_class', 'in', rev_open_close)
+   |rejectattr('state', 'eq', 'open')
+   |list %}
+{{ (open+closed)|list|count }}
+{% endmacro %}
+
+{% macro domain_state_count(domain, cmp, state, entities) %}
+{{ entities|select('match', domain + '\.')|
+   map('states')|
+   select(cmp, state)|
+   list|
+   count
+}}
+{% endmacro %}

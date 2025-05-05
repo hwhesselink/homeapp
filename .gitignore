@@ -1,0 +1,5 @@
+configs.py
+owenpytry1.yaml*
+.exrc
+.*.swp
+__pycache__/
