@@ -356,7 +356,13 @@ def gen_areas():
     return [ gen_area(i) for i in area_ids ]
 
 def gen_lists():
-    r = [ gen_temperature_list() ] + [ gen_humidity_list() ]
+    r = []
+    tl = gen_temperature_list()
+    if tl:
+        r += [ tl]
+    hl = gen_humidity_list()
+    if hl:
+        r += [ hl]
     r += [ t for t in [ gen_temperature_list(i) for i in area_ids ] if t ]
     r += [ h for h in [ gen_humidity_list(i) for i in area_ids ] if h ]
     return r
