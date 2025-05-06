@@ -211,8 +211,8 @@ These domains may have relevant entities:
 - Switch
 - Vacuum
 
-(For each domain the optimal way to set the filters and sort the columns is different.
-For example for lights you might select domain "Lights", sort on "Integration" and add the "in_summaries" label to all lights that do not have integration "Group".)
+Going through long lists of entities item by item to decide what to select is no fun, so it helps to use filters and column sorting to group them.
+For example for lights you might select domain "Lights", sort on "Integration", and add the "in_summaries" label to all lights that do not have integration "Group".
 
 Once the areas and labels are configured running Homeapp should generate a full Home-style dashboard.
 
