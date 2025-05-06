@@ -98,7 +98,7 @@ For the temperature helper:
 ```
 8. click "SUBMIT" at the bottom and then "FINISH"
 
-For the humidity helper do the same but use "Humidity" in step 5 and make sure the Entity ID is "sensor.summary_humidity" in step 6.
+For the humidity helper do the same but use "Summary Humidity" in step 5 and make sure the Entity ID is "sensor.summary_humidity" in step 6.
 Then copy the following to the "State template" field:
 ```
 {% from 'summaries.jinja' import min_max_range %}
