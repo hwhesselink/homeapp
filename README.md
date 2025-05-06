@@ -7,6 +7,8 @@ Areas drive dashboard creation, only entities assigned to an area are included.
 Labels determine what entities are included on the home page and in chips and badges.
 Adding entities is described in [Populating the dashboard](#populating-the-dashboard) below.
 
+![piccie](Screenshots/Combi.jpg)
+
 # Installation
 There's no HACS support yet so to install you'll need access to your Home Assistant config.
 The most common ways to do that are:
