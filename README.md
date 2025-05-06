@@ -74,13 +74,11 @@ Homeapp needs a background image and a couple of custom templates and helpers in
 
 ### Background image
 Any file can be installed as background, "view_background.jpg" from the repo was used in the screenshots.
-If it does not exist create the directory "/config/www".
-Then place the file there.
+Create the directory "/config/www" if it does not exist and place the file there.
 It must be called "view_background.jpg".
 
 ### Custom templates
-If it does not exist create the directory "/config/custom_templates".
-Place the file "summaries.jinja" there.
+Create the directory "/config/custom_templates" if it does not exist and place the file "summaries.jinja" from the repo there.
 
 ### Helpers
 Create helper templates for temperature and humidity.
